@@ -55,24 +55,6 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
 						</specificcountry>
-						<infotext_checkout translate="label comment" module="adminpayment">
-							<label>Text on Checkout</label>
-							<frontend_type>textarea</frontend_type>
-							<sort_order>60</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-							<comment><![CDATA[Payment method description after selection of the payment method.]]></comment>
-						</infotext_checkout>
-						<infotext_overview translate="label comment" module="adminpayment">
-							<label>Text on Overview</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>70</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-							<comment><![CDATA[Payment method description visible on the overview.]]></comment>
-						</infotext_overview>
 						<sort_order translate="label">
 							<label>Sort Order</label>
 							<frontend_type>text</frontend_type>
