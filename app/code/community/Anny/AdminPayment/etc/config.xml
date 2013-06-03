@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<config>
+
+	<modules>
+		<Anny_AdminPayment>
+			<version>0.1.0</version>
+			<platform>ce</platform>
+		</Anny_AdminPayment>
+	</modules>
+
+	<global>
+		<blocks>
+			<adminpayment>
+				<class>Anny_AdminPayment_Block</class>
+			</adminpayment>
+		</blocks>
+		<helpers>
+			<adminpayment>
+				<class>Anny_AdminPayment_Helper</class>
+			</adminpayment>
+		</helpers>
+		<models>
+			<adminpayment>
+				<class>Anny_AdminPayment_Model</class>
+			</adminpayment>
+		</models>
+	</global>
+
+	<default>
+		<payment>
+			<adminpayment_payment>
+				<active>1</active>
+				<active_in_frontend>0</active_in_frontend>
+				<model>adminpayment/payment</model>
+				<order_status>pending</order_status>
+				<title>Admin Payment</title>
+				<allowspecific>0</allowspecific>
+			</adminpayment_payment>
+		</payment>
+	</default>
+
+</config>
