@@ -43,7 +43,7 @@ class Anny_AdminPayment_Model_Observer
 			$_order->setState( $state, $status )->save();
 
 			$log = sprintf( "Order ID: %d\nState: %s\nStatus: %s",
-				$_order->getIncrementId()
+				$_order->getIncrementId(),
 				$state,
 				$status
 			);
