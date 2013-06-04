@@ -28,7 +28,7 @@
 
 	<global>
 		<events>
-			<sales_order_place_after>
+			<checkout_onepage_controller_success_action>
 				<observers>
 					<adminpayment_force_status>
 						<type>singleton</type>
@@ -36,7 +36,16 @@
 						<method>forceOrderStatus</method>
 					</adminpayment_force_status>
 				</observers>
-			</sales_order_place_after>
+			</checkout_onepage_controller_success_action>
+			<checkout_multishipping_controller_success_action>
+				<observers>
+					<adminpayment_force_status>
+						<type>singleton</type>
+						<class>adminpayment/observer</class>
+						<method>forceOrderStatus</method>
+					</adminpayment_force_status>
+				</observers>
+			</checkout_multishipping_controller_success_action>
 		</events>
 	</global>
 

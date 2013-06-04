@@ -57,6 +57,7 @@
 						</specificcountry>
 						<force_status translate="label comment" module="adminpayment">
 							<label>Force Status</label>
+							<comment><![CDATA[Order status is only forced when using this payment method on the storefront. When using the Magento admin interface to create an order the usual flow is respected.]]></comment>
 							<frontend_type>select</frontend_type>
 							<sort_order>60</sort_order>
 							<source_model>adminpayment/system_config_source_order_status</source_model>

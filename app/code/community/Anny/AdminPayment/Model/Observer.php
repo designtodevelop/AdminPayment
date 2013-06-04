@@ -4,7 +4,7 @@ class Anny_AdminPayment_Model_Observer
 {
 	const PAYMENT_METHOD_CODE = 'adminpayment_payment';
 
-	const DEBUG_LOG_ENABLED = true;
+	const DEBUG_LOG_ENABLED = false;
 	const DEBUG_LOG_FILE = 'adminpayment.log';
 
 	public function getOrderStatusToForce()
@@ -33,33 +33,41 @@ class Anny_AdminPayment_Model_Observer
 		return false;
 	}
 
+	protected function forceOrderStatusOnOrder( $_order, $statusInfo )
+	{
+		$status = $statusInfo->getStatus();
+		$state = $statusInfo->getState();
+
+		try
+		{
+			$_order->setState( $state, $status )->save();
+
+			$log = sprintf( "Order ID: %d\nState: %s\nStatus: %s",
+				$_order->getIncrementId()
+				$state,
+				$status
+			);
+
+			Mage::log( $log, null, self::DEBUG_LOG_FILE, self::DEBUG_LOG_ENABLED );
+		}
+		catch( Exception $e )
+		{
+			Mage::log( $e->getMessage(), null, self::DEBUG_LOG_FILE, self::DEBUG_LOG_ENABLED );
+		}
+	}
+
 	public function forceOrderStatus($observer)
 	{
-		$_order = $observer->getEvent()->getOrder();
-		$method = $_order->getPayment()->getMethod();
+		$orderIds = $observer->getEvent()->getOrderIds();
+		$statusInfo = $this->getOrderStatusToForce();
 
-		if( $method == self::PAYMENT_METHOD_CODE && $statusInfo = $this->getOrderStatusToForce())
+		foreach( $orderIds as $orderId )
 		{
-			$status = $statusInfo->getStatus();
-			$state = $statusInfo->getState();
-
-			try
+			$_order = Mage::getModel('sales/order')->load($orderId);
+			$method = $_order->getPayment()->getMethod();
+			if( $method == self::PAYMENT_METHOD_CODE && $statusInfo )
 			{
-				$_order->setState( $state, $status )->save();
-
-				$log = sprintf( "New state: %s / Actual state: %s\nNew status: %s / Actual status: %s\nOrder ID: %d",
-					$state,
-					$_order->getState(),
-					$status,
-					$_order->getStatus(),
-					$_order->getIncrementId()
-				);
-
-				Mage::log( $log, null, self::DEBUG_LOG_FILE, self::DEBUG_LOG_ENABLED );
-			}
-			catch( Exception $e )
-			{
-				Mage::log( $e->getMessage(), null, self::DEBUG_LOG_FILE, self::DEBUG_LOG_ENABLED );
+				$this->forceOrderStatusOnOrder( $_order, $statusInfo );
 			}
 		}
 	}
