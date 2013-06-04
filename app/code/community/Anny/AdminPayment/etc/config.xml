@@ -26,6 +26,20 @@
 		</models>
 	</global>
 
+	<global>
+		<events>
+			<sales_order_place_after>
+				<observers>
+					<adminpayment_force_status>
+						<type>singleton</type>
+						<class>adminpayment/observer</class>
+						<method>forceOrderStatus</method>
+					</adminpayment_force_status>
+				</observers>
+			</sales_order_place_after>
+		</events>
+	</global>
+
 	<default>
 		<payment>
 			<adminpayment_payment>
